@@ -6,7 +6,7 @@ import { UserContext } from "../../providers/userContext";
 import cssClasses from "../cssClasses";
 import back_img from '../../images/register_card.jpg';
 import Swal from "sweetalert2";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const styles = makeStyles(theme => ({
     card: {
@@ -25,9 +25,15 @@ const Register = () => {
     const history = useHistory();
 
     const registerForm = {
-        fullname: '',
-        email: '',
-        password: ''
+        fullname: "",
+        email: "",
+        password: "",
+        age: 0,
+        interests: [],
+        created: new Date(),
+        isadmin: false,
+        enrolled: null,
+        avatar: ""
     };
 
     const onFormSubmit = (value, { setSubmitting }) => {
@@ -75,10 +81,10 @@ const Register = () => {
 
 
                                         <div className="text-center">
-                                            <button className="btn btn-warning mt-5 w-100" disabled={isSubmitting}>Submit</button>
+                                            <button className="btn btn-warning mt-5 w-100" >Submit</button>
                                         </div>
 
-                                        <p className="mt-3 text-center">Already Registered? <a href="loginpage.html">Login Here</a></p>
+                                        <p className="mt-3 text-center">Already Registered? <Link to="/main/login">Login Here</Link></p>
 
                                     </form>
                                 )}

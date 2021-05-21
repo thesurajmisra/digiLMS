@@ -2,6 +2,7 @@ import { useState } from 'react';
 import DrawerComponent from '../drawer';
 import Header from '../header';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 import { useRouteMatch, Switch, Route } from 'react-router';
 import Profile from '../profile';
 
@@ -27,6 +28,11 @@ const UserDashboard = () => {
             name: "Profile",
             icon: <AccountBoxIcon />,
             link: `${url}/profile`
+        },
+        {
+            name: "Add New Course",
+            icon: <PostAddIcon />,
+            link: `${url}/addcourse`
         }
     ]
 

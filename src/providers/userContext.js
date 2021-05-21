@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { createContext } from "react";
+import { useHistory } from "react-router";
 import app_config from "../config";
 
 export const UserContext = createContext();
@@ -10,7 +11,9 @@ export const UserProvider = props => {
     const url = app_config.api_url + '/user';
 
     const [loggedin, setLoggedin] = useState(false);
-    const [currentUser, setCurrentUser] = useState(null);
+    const [currentUser, setCurrentUser] = useState({});
+    const history = useHistory();
+
 
     useEffect(() => {
         let user = sessionStorage.getItem('user');
@@ -43,6 +46,7 @@ export const UserProvider = props => {
         sessionStorage.removeItem('user');
         setLoggedin(false);
         setCurrentUser(null);
+        history.push('/main/login');
     }
 
     const toProvide = {

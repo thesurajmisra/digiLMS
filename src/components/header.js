@@ -2,15 +2,19 @@ import { AppBar, Button, IconButton, Toolbar, Typography } from "@material-ui/co
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import app_config from '../config';
 import clsx from "clsx";
+import { UserContext } from "../providers/userContext";
 
 const Header = props => {
 
     const open = props.open;
     const drawerWidth = props.drawerWidth;
     const handleDrawerOpen = props.handleDrawerOpen;
+    let { path, url } = useRouteMatch();
+    const userService = useContext(UserContext);
+
 
 
     const useStyles = makeStyles((theme) => ({
@@ -66,6 +70,32 @@ const Header = props => {
         }
     }
 
+    const AuthOptions = () => {
+        if (!userService.loggedin) {
+            return (
+                <div>
+                    <Link to="/main/login" className={classes.link}>
+                        <Button color="inherit">Login</Button>
+                    </Link>
+
+                    <Link to="/main/register" className={classes.link}>
+                        <Button color="inherit">Register</Button>
+                    </Link>
+                </div>
+
+            )
+        } else {
+            return (
+                <div>
+                    <Link to={`${path}`} className={classes.link}>
+                        <Button color="inherit">Dashboard</Button>
+                    </Link>
+                    <Button color="inherit" onClick={e => (userService.Logout())}>Logout</Button>
+                </div>
+            )
+        }
+    }
+
     return (
         <AppBar
             position="sticky"
@@ -77,13 +107,9 @@ const Header = props => {
                 <Typography variant="h6" className={classes.title}>
                     {app_config.projectTitle}
                 </Typography>
-                <Link to="/main/login" className={classes.link}>
-                    <Button color="inherit">Login</Button>
-                </Link>
-
-                <Link to="/main/register" className={classes.link}>
-                    <Button color="inherit">Register</Button>
-                </Link>
+                {
+                    AuthOptions()
+                }
 
             </Toolbar>
         </AppBar>

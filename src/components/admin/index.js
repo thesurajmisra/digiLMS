@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import DrawerComponent from '../drawer';
 import Header from '../header';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
@@ -10,6 +10,8 @@ import AdminDashboard from './dashboard';
 import Profile from '../profile';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core';
+import AddCourse from './addCourse';
+import { UserContext } from '../../providers/userContext';
 
 const drawerWidth = 240;
 
@@ -35,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 const Admin = () => {
 
     const [open, setOpen] = useState(true);
+    const userService = useContext(UserContext);
 
     const classes = useStyles();
 
@@ -56,6 +59,11 @@ const Admin = () => {
             name: "ManageUsers",
             icon: <PeopleIcon />,
             link: "/admin/manageusers"
+        },
+        {
+            name: "Create New Course",
+            icon: <PeopleIcon />,
+            link: "/admin/addcourse"
         },
     ]
 
@@ -87,6 +95,9 @@ const Admin = () => {
                     <Route path={`${path}/manageuser`} component={ManageUser} />
                     <Route exact path={`${path}`}>
                         <Profile />
+                    </Route>
+                    <Route exact path={`${path}/addcourse`}>
+                        <AddCourse />
                     </Route>
                 </Switch>
 

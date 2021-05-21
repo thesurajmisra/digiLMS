@@ -12,6 +12,7 @@ import Admin from './components/admin';
 import ManageUser from './components/admin/manageuser';
 import UserDashboard from './components/user';
 import Main from './components/authentication';
+import { CourseProvider } from './providers/courseContext';
 
 
 
@@ -25,6 +26,7 @@ function App() {
       secondary: {
         main: green[500],
       },
+      // type: 'dark'
     },
     transitions: {
       duration: {
@@ -38,25 +40,27 @@ function App() {
       <Router>
         <UserProvider>
 
-          <Route exact path="/">
-            <Redirect to="/main/login" />
-          </Route>
+          <CourseProvider>
+            <Route exact path="/">
+              <Redirect to="/main/login" />
+            </Route>
 
-          <Route path="/main">
-            <Main />
-          </Route>
+            <Route path="/main">
+              <Main />
+            </Route>
 
-          <Route path="/admin/manageuser">
-            <ManageUser />
-          </Route>
+            <Route path="/admin/manageuser">
+              <ManageUser />
+            </Route>
 
-          <Route path="/admin">
-            <Admin />
-          </Route>
+            <Route path="/admin">
+              <Admin />
+            </Route>
 
-          <Route path="/user">
-            <UserDashboard />
-          </Route>
+            <Route path="/user">
+              <UserDashboard />
+            </Route>
+          </CourseProvider>
 
         </UserProvider>
       </Router>

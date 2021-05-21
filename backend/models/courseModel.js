@@ -3,9 +3,10 @@ const mongoose = require('../connection');
 const schema = new mongoose.Schema({
     title: String,
     description: String,
-    Details: Object,
+    category: String,
     avatar: String,
-    material: { type: mongoose.Types.ObjectId, ref: 'CourseMaterial' },
+    target: String,
+    data: Object,
     reviews: [{ type: mongoose.Types.ObjectId, ref: 'Reviews' }]
 })
 

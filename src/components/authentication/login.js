@@ -42,12 +42,13 @@ const Login = () => {
                             userService.setLoggedin(true);
                             sessionStorage.setItem('user', JSON.stringify(userdata));
                             userService.setCurrentUser(userdata);
+                            console.log(userService.currentUser);
+                            if (userdata.isadmin) {
+                                history.push("/admin");
+                            } else {
+                                history.push("/user");
+                            }
 
-                            // if (userdata['isadmin']) {
-                            //   this.router.navigate(['/admin']);
-                            // } else {
-                            //   this.router.navigate(['/user']);
-                            // }
                         });
                     } else {
                         Swal.fire({
@@ -96,10 +97,10 @@ const Login = () => {
 
 
                                 <div className="text-center">
-                                    <button className="btn btn-warning mt-5 w-100" disabled={isSubmitting}>Submit</button>
+                                    <button className="btn btn-warning mt-5 w-100" >Submit</button>
                                 </div>
 
-                                <p className="mt-3 text-center">Register Instead? <Link to="/login">Register Here</Link></p>
+                                <p className="mt-3 text-center">Register Instead? <Link to="/main/register">Register Here</Link></p>
 
                             </form>
                         )}
