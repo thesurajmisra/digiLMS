@@ -14,6 +14,7 @@ app.use('/user', userRouter);
 app.use('/util', utilRouter);
 app.use('/course', courseRouter);
 
+app.use(express.static('./uploads/'))
 
 app.get('/home', (req, res) => {
     res.send("Welcome Home");

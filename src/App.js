@@ -13,6 +13,9 @@ import ManageUser from './components/admin/manageuser';
 import UserDashboard from './components/user';
 import Main from './components/authentication';
 import { CourseProvider } from './providers/courseContext';
+import ListCourses from './components/listCourses';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 
 
 
@@ -35,6 +38,10 @@ function App() {
     },
   });
 
+  const stripe = loadStripe(
+    "pk_test_Vmvhpm2TASsGcgF4RcyQfkF000KwucQJR1"
+  );
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -45,9 +52,11 @@ function App() {
               <Redirect to="/main/login" />
             </Route>
 
-            <Route path="/main">
-              <Main />
-            </Route>
+            <Elements stripe={stripe}>
+              <Route path="/main">
+                <Main />
+              </Route>
+            </Elements>
 
             <Route path="/admin/manageuser">
               <ManageUser />
@@ -59,6 +68,10 @@ function App() {
 
             <Route path="/user">
               <UserDashboard />
+            </Route>
+
+            <Route path="/list">
+              <ListCourses />
             </Route>
           </CourseProvider>
 

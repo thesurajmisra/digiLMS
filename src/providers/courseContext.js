@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useEffect } from "react";
 import { createContext } from "react";
 import app_config from "../config";
@@ -25,9 +24,9 @@ export const CourseProvider = props => {
             .then(response => response.json());
     }
 
-    const getUserByEmail = email => {
+    const getAllCourses = data => {
 
-        return fetch(url + '/getbyemail/' + email)
+        return fetch(url + '/getall')
             .then(response => response.json());
     }
 
@@ -43,7 +42,8 @@ export const CourseProvider = props => {
 
     const toProvide = {
         addCourse,
-        uploadFile
+        uploadFile,
+        getAllCourses
     }
 
     return (

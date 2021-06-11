@@ -7,6 +7,8 @@ import app_config from '../config';
 import clsx from "clsx";
 import { UserContext } from "../providers/userContext";
 
+
+
 const Header = props => {
 
     const open = props.open;
@@ -14,8 +16,6 @@ const Header = props => {
     const handleDrawerOpen = props.handleDrawerOpen;
     let { path, url } = useRouteMatch();
     const userService = useContext(UserContext);
-
-
 
     const useStyles = makeStyles((theme) => ({
         appBar: {
@@ -107,9 +107,11 @@ const Header = props => {
                 <Typography variant="h6" className={classes.title}>
                     {app_config.projectTitle}
                 </Typography>
+                <Button component={Link} to={'/list'} color="inherit">Explore Courses</Button>
                 {
                     AuthOptions()
                 }
+
 
             </Toolbar>
         </AppBar>

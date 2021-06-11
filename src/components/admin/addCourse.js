@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import update from 'immutability-helper';
 
 import { Accordion, AccordionActions, AccordionDetails, AccordionSummary, Button, Card, CardContent, Chip, FormControl, InputBase, InputLabel, makeStyles, MenuItem, Paper, Select, Tab, Tabs, TextField, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Ballot } from '@material-ui/icons';
 import { CourseContext } from '../../providers/courseContext';
@@ -31,7 +31,7 @@ const AddCourse = () => {
 
     const prerequisites = ['HTML', 'CSS', 'JavaScript Basics', 'Python Basics', 'Flexbox'];
     const courseService = React.useContext(CourseContext);
-    let tempForm = {};
+    const [tempForm, setTempForm] = useState({});
 
     const classes = styles();
     const [value, setValue] = React.useState(0);
@@ -54,10 +54,13 @@ const AddCourse = () => {
     });
     const [dataReady, setDataReady] = React.useState(false);
 
+    const [imgPath, setImgPath] = useState("");
+    const [avatar, setAvatar] = useState("");
+
     const courseForm = {
         title: "",
         description: "",
-        category: "",
+        category: "web dev",
         prerequisites: [],
         avatar: "",
         target: "",
@@ -67,13 +70,19 @@ const AddCourse = () => {
 
     const onFormSubmit = (formdata) => {
         console.log('click on button to submit form');
-        tempForm = formdata;
-        console.log(tempForm);
+        setTempForm(formdata);
+        console.log(formdata);
     }
 
-    const courseSubmit = () => {
-        tempForm['data'] = curriculum;
-        console.log(tempForm);
+    const createCourse = () => {
+        let formdata = tempForm;
+        formdata['data'] = curriculum;
+        formdata['avatar'] = avatar;
+        console.log(formdata);
+        courseService.addCourse(formdata)
+            .then(res => {
+                console.log(res);
+            })
     }
 
     const addNewSection = () => {
@@ -97,8 +106,6 @@ const AddCourse = () => {
             }
         });
 
-        // console.log(newData);
-
         setCurriculum(newData);
 
     }
@@ -119,7 +126,6 @@ const AddCourse = () => {
         });
 
         setCurriculum(newData);
-        // console.log(newData);
     }
 
 
@@ -145,6 +151,7 @@ const AddCourse = () => {
         const newData = update(curriculum, {
             sections: sections
         });
+
         setCurriculum(newData);
     }
 
@@ -160,10 +167,31 @@ const AddCourse = () => {
 
     }
 
+    const uploadThumbnail = (event) => {
+        const data = new FormData();
+        data.append("file", event.target.files[0]);
+        setAvatar(event.target.files[0].name);
+        courseService.uploadFile(data).then((res) => console.log(res));
 
-    const addCourse = () => {
-        console.log(curriculum);
-        courseService.addCourse()
+        var mimeType = event.target.files[0].type;
+        if (mimeType.match(/image\/*/) == null) {
+            // erroMsg = 'Only images are supported.';
+            return;
+        }
+
+        var reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = (_event) => {
+            setImgPath(reader.result);
+        };
+    };
+
+    const showThumb = () => {
+        if (imgPath) {
+            return (
+                <img src={imgPath} className="img-fluid" />
+            )
+        }
     }
 
     React.useEffect(() => {
@@ -212,7 +240,7 @@ const AddCourse = () => {
                 }
                 <Button onClick={addNewSection}>Add New Section</Button>
 
-                <Button className="w-100 mt-5">Create Course</Button>
+                <Button className="w-100 mt-5" onClick={createCourse}>Create Course</Button>
 
             </div>
         )
@@ -238,6 +266,15 @@ const AddCourse = () => {
             <TabPanel value={value} index={0}>
                 <h3>Course Title</h3>
 
+                <div className="row">
+                    <div className="col-md-6">
+                        {showThumb()}
+                    </div>
+                    <div className="col-md-6">
+                        <input type="file" onChange={uploadThumbnail} />
+                    </div>
+                </div>
+
                 <Formik
                     initialValues={courseForm}
                     onSubmit={onFormSubmit}
@@ -255,8 +292,7 @@ const AddCourse = () => {
 
                             <FormControl variant="filled" className={classes.formControl}>
                                 <InputLabel>Course Category</InputLabel>
-                                <Select id="category" value={values.category} onChange={handleChange}
-                                    value={20}
+                                <Select id="category" value={values.category} name="category" onChange={handleChange}
                                 >
                                     <MenuItem value="">
                                         <em>None</em>
@@ -288,6 +324,7 @@ const AddCourse = () => {
                             <h3 className="mt-5">Target Students</h3>
                             <InputBase id="target" value={values.target} onChange={handleChange} className={classes.input} placeholder={'BCA, B.Tech etc.'} />
 
+                            <Button type="submit">Next</Button>
                         </form>
                     )}
                 </Formik>
