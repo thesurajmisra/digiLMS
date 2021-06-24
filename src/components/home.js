@@ -5,7 +5,7 @@ const Home = () => {
             <header id="header" className="fixed-top">
                 <div className="container d-flex align-items-center">
 
-                    <h1 className="logo me-auto"><a href="index.html">Mentor</a></h1>
+                    <h1 className="logo me-auto"><a href="index.html">DigiLMS</a></h1>
 
                     <nav id="navbar" className="navbar order-last order-lg-0">
                         <ul>
@@ -58,7 +58,7 @@ const Home = () => {
 
                         <div className="row">
                             <div className="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-                                <img src="assets/img/about.jpg" className="img-fluid" alt="" />
+                                <img src="assets/img/about1.jpg" className="img-fluid" alt="" />
                             </div>
                             <div className="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
                                 <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
@@ -115,7 +115,7 @@ const Home = () => {
                         <div className="row">
                             <div className="col-lg-4 d-flex align-items-stretch">
                                 <div className="content">
-                                    <h3>Why Choose Mentor?</h3>
+                                    <h3>Why Choose DigiLMS?</h3>
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
                                         Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
