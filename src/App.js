@@ -1,8 +1,5 @@
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 
-import Header from "./components/header";
-import Register from "./components/authentication/register";
-import Login from "./components/authentication/login";
 import { UserProvider } from "./providers/userContext";
 
 import { ThemeProvider } from "@material-ui/core";
@@ -16,7 +13,7 @@ import { CourseProvider } from './providers/courseContext';
 import ListCourses from './components/listCourses';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-
+import Home from './components/home';
 
 
 function App() {
@@ -68,6 +65,10 @@ function App() {
 
             <Route path="/main">
               <Main />
+            </Route>
+
+            <Route path="/home">
+              <Home />
             </Route>
 
             <Route path="/list">
