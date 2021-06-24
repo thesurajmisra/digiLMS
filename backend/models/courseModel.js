@@ -7,6 +7,7 @@ const schema = new mongoose.Schema({
     avatar: String,
     target: String,
     data: Object,
+    price: Number,
     reviews: [{ type: mongoose.Types.ObjectId, ref: 'Reviews' }]
 })
 

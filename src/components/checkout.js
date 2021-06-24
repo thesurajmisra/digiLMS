@@ -51,7 +51,7 @@ const Checkout = props => {
     const userService = useContext(UserContext);
     const orderService = useContext(OrderContext);
 
-    const [equipmentDetails, setEquipmentDetails] = useState(JSON.parse(sessionStorage.getItem('order-item')));
+    const [courseDetails, setCourseDetails] = useState(JSON.parse(sessionStorage.getItem('course')));
     const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
     const [userForm, setUserForm] = useState({});
 
@@ -60,6 +60,7 @@ const Checkout = props => {
     const history = useHistory();
 
     useEffect(() => {
+        console.log(courseDetails);
         console.log(currentUser);
         const user = currentUser;
         user['address'] = "";
@@ -67,22 +68,18 @@ const Checkout = props => {
     }, [])
 
     const saveOrder = () => {
-        let order = {};
-        order['user'] = currentUser._id;
-        order['data'] = { 'address': userForm.address };
-        order['equipment'] = equipmentDetails._id;
-        order['created'] = new Date();
-        orderService.addOrder(order)
+
+        userService.purchaseCourse(currentUser._id, { enrolled: courseDetails._id })
             .then(res => {
                 console.log(res);
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Equipment Ordered',
-                    text: 'You have Ordered sucessfully'
+                    title: 'Course Purchased',
+                    text: 'You have Purchased sucessfully'
                 })
                     .then(d => {
-                        history.push('/user/manageorder');
+                        history.push('/user/managecourses');
                     })
             })
     }
@@ -91,7 +88,7 @@ const Checkout = props => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ amount: equipmentDetails.price * 100 })
+            body: JSON.stringify({ amount: courseDetails.price * 100 })
         }
         return fetch(url + '/create-payment-intent', requestOptions)
             .then(response => response.json())
@@ -144,26 +141,25 @@ const Checkout = props => {
 
                     <h2 className="text-center">Order Checkout</h2>
                     <hr />
-
                     <div className="row">
                         <div className="col-md-4">
                             <div className="product-details">
 
-                                <h3>Equipment Details</h3>
+                                <h3>Course Details</h3>
                                 <hr />
 
                                 <div className="avatar">
-                                    <img className="img-fluid" src={`${url}/${equipmentDetails.avatar}`} />
+                                    <img className="img-fluid" src={`${url}/${courseDetails.avatar}`} />
                                 </div>
 
-                                <p className="detail-name mt-5">Equipment Name :</p>
-                                <p className="detail">{equipmentDetails.name}</p>
+                                <p className="detail-name mt-5">Course Name :</p>
+                                <p className="detail">{courseDetails.name}</p>
 
                                 <p className="detail-name mt-3">Description :</p>
-                                <p className="detail">{equipmentDetails.description}</p>
+                                <p className="detail">{courseDetails.description}</p>
 
                                 <p className="detail-name mt-3">Price :</p>
-                                <p className="detail-price" style={{ fontSize: '3rem' }}>{equipmentDetails.price}</p>
+                                <p className="detail-price" style={{ fontSize: '3rem' }}>{courseDetails.price}</p>
 
                             </div>
 
@@ -212,12 +208,13 @@ const Checkout = props => {
                                     options={CARD_OPTIONS}
                                 />
 
-                                <Button disabled={isPaymentLoading} className="mt-5 w-100" variant="contained" color="secondary" type="submit">{isPaymentLoading ? "Loading..." : `Pay ₹${equipmentDetails.price}/-`}</Button>
+                                <Button disabled={isPaymentLoading} className="mt-5 w-100" variant="contained" color="secondary" type="submit">{isPaymentLoading ? "Loading..." : `Pay ₹${courseDetails.price}/-`}</Button>
 
                             </div>
                         </form>
 
                     </div>
+
 
                 </CardContent>
             </Card>

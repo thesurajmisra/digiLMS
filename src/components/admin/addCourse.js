@@ -65,6 +65,8 @@ const AddCourse = () => {
         avatar: "",
         target: "",
         data: {},
+        price: 0,
+        created: new Date(),
         reviews: Array
     }
 
@@ -323,6 +325,9 @@ const AddCourse = () => {
 
                             <h3 className="mt-5">Target Students</h3>
                             <InputBase id="target" value={values.target} onChange={handleChange} className={classes.input} placeholder={'BCA, B.Tech etc.'} />
+
+                            <h3 className="mt-5">Price</h3>
+                            <InputBase id="price" type="number" value={values.price} onChange={handleChange} className={classes.input} placeholder={'1000'} />
 
                             <Button type="submit">Next</Button>
                         </form>

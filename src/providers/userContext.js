@@ -35,9 +35,35 @@ export const UserProvider = props => {
             .then(response => response.json());
     }
 
+    const purchaseCourse = (id, data) => {
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }
+
+        return fetch(url + '/pushupdate/' + id, requestOptions)
+            .then(response => response.json());
+    }
+
+    const deleteUser = id => {
+        const requestOptions = {
+            method: 'DELETE'
+        }
+
+        return fetch(url + '/delete/' + id, requestOptions)
+            .then(response => response.json());
+    }
+
     const getUserByEmail = email => {
 
         return fetch(url + '/getbyemail/' + email)
+            .then(response => response.json());
+    }
+
+    const getAll = () => {
+
+        return fetch(url + '/getall')
             .then(response => response.json());
     }
 
@@ -57,7 +83,10 @@ export const UserProvider = props => {
         setCurrentUser,
 
         addUser,
+        getAll,
         getUserByEmail,
+        deleteUser,
+        purchaseCourse,
         Logout
     }
 

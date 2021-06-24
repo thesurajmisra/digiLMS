@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
     interests: Array,
     created: Date,
     isadmin: Boolean,
-    enrolled: { type: mongoose.Types.ObjectId, ref: "Courses" },
+    enrolled: [{ type: mongoose.Types.ObjectId, ref: "Courses" }],
     avatar: String
 })
 

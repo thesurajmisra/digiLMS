@@ -39,7 +39,7 @@ const ListCourses = props => {
     const courseService = useContext(CourseContext);
 
     const fetchCourses = () => {
-        courseService.getAllCourses()
+        courseService.getAll()
             .then(data => {
                 console.log(data);
                 setCourseList(data);
@@ -53,15 +53,16 @@ const ListCourses = props => {
     }, [])
 
     const buyCourse = (course) => {
-        sessionStorage.setItem('course', JSON.stringify(course));
-        history.push('/main/checkout');
+        // sessionStorage.setItem('course', JSON.stringify(course));
+        console.log(course);
+        history.push('/user/coursedetail/' + course._id);
     }
 
     return (
         <div className="col-md-10 mx-auto">
 
             <Card className="hero">
-                <h1>Explore Courese</h1>
+                <h1>Explore Courses</h1>
             </Card>
 
             <div className="row mt-5">

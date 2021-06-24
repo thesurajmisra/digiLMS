@@ -32,7 +32,7 @@ const Register = () => {
         interests: [],
         created: new Date(),
         isadmin: false,
-        enrolled: null,
+        enrolled: [],
         avatar: ""
     };
 

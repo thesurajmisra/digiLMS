@@ -24,9 +24,21 @@ export const CourseProvider = props => {
             .then(response => response.json());
     }
 
-    const getAllCourses = data => {
+    const getAll = data => {
 
         return fetch(url + '/getall')
+            .then(response => response.json());
+    }
+
+    const getById = id => {
+
+        return fetch(url + '/getbyid/' + id)
+            .then(response => response.json());
+    }
+
+    const deleteCourse = id => {
+
+        return fetch(url + '/delete/' + id, { method: 'DELETE' })
             .then(response => response.json());
     }
 
@@ -43,7 +55,9 @@ export const CourseProvider = props => {
     const toProvide = {
         addCourse,
         uploadFile,
-        getAllCourses
+        getAll,
+        deleteCourse,
+        getById,
     }
 
     return (

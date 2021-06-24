@@ -1,7 +1,7 @@
 import { AppBar, Button, IconButton, Toolbar, Typography } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import app_config from '../config';
 import clsx from "clsx";
@@ -16,6 +16,7 @@ const Header = props => {
     const handleDrawerOpen = props.handleDrawerOpen;
     let { path, url } = useRouteMatch();
     const userService = useContext(UserContext);
+    const [currentUser, SetCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 
     const useStyles = makeStyles((theme) => ({
         appBar: {
@@ -72,6 +73,7 @@ const Header = props => {
 
     const AuthOptions = () => {
         if (!userService.loggedin) {
+
             return (
                 <div>
                     <Link to="/main/login" className={classes.link}>
@@ -85,9 +87,10 @@ const Header = props => {
 
             )
         } else {
+            const dashLink = currentUser.isadmin ? 'admin' : 'user';
             return (
                 <div>
-                    <Link to={`${path}`} className={classes.link}>
+                    <Link to={`${dashLink}`} className={classes.link}>
                         <Button color="inherit">Dashboard</Button>
                     </Link>
                     <Button color="inherit" onClick={e => (userService.Logout())}>Logout</Button>
@@ -107,7 +110,7 @@ const Header = props => {
                 <Typography variant="h6" className={classes.title}>
                     {app_config.projectTitle}
                 </Typography>
-                <Button component={Link} to={'/list'} color="inherit">Explore Courses</Button>
+                <Button component={Link} to={'/main/list'} color="inherit">Explore Courses</Button>
                 {
                     AuthOptions()
                 }

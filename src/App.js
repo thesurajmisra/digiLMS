@@ -53,8 +53,8 @@ function App() {
             </Route>
 
             <Elements stripe={stripe}>
-              <Route path="/main">
-                <Main />
+              <Route path="/user">
+                <UserDashboard />
               </Route>
             </Elements>
 
@@ -66,8 +66,8 @@ function App() {
               <Admin />
             </Route>
 
-            <Route path="/user">
-              <UserDashboard />
+            <Route path="/main">
+              <Main />
             </Route>
 
             <Route path="/list">

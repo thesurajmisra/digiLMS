@@ -12,6 +12,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core';
 import AddCourse from './addCourse';
 import { UserContext } from '../../providers/userContext';
+import ManageCourses from './manageCourses';
 
 const drawerWidth = 240;
 
@@ -65,6 +66,11 @@ const Admin = () => {
             icon: <PeopleIcon />,
             link: "/admin/addcourse"
         },
+        {
+            name: "ManageCourses",
+            icon: <PeopleIcon />,
+            link: "/admin/managecourses"
+        },
     ]
 
     const handleDrawerOpen = () => {
@@ -92,7 +98,8 @@ const Admin = () => {
                 <Switch>
                     <Route path={`${path}/profile`} component={Profile} />
                     <Route path={`${path}/dashboard`} component={AdminDashboard} />
-                    <Route path={`${path}/manageuser`} component={ManageUser} />
+                    <Route path={`${path}/manageusers`} component={ManageUser} />
+                    <Route path={`${path}/managecourses`} component={ManageCourses} />
                     <Route exact path={`${path}`}>
                         <Profile />
                     </Route>
