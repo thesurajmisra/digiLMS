@@ -402,7 +402,7 @@ const Home = () => {
                         <div className="row">
 
                             <div className="col-lg-3 col-md-6 footer-contact">
-                                <h3>Mentor</h3>
+                                <h3>DIGILMS</h3>
                                 <p>
                                     A108 Adam Street <br />
                                     New York, NY 535022<br />
