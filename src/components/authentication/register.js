@@ -72,7 +72,7 @@ const Register = () => {
                                 }) => (
                                     <form onSubmit={handleSubmit}>
 
-                                        <h3 className="text-center">Register Here</h3>
+                                        <h3 className="text-center"><span className="underline__post"><span>Register</span> Here</span></h3>
 
                                         <TextField label="Full Name" variant="filled" name="fullname" className={baseClasses.input} onChange={handleChange} value={values.fullname} />
                                         <TextField label="Email" variant="filled" name="email" className={baseClasses.input} onChange={handleChange} value={values.email} />
