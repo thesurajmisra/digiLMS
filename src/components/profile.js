@@ -60,7 +60,7 @@ const Profile = props => {
                                 }) => (
                                     <form onSubmit={handleSubmit}>
 
-                                        <h3 className="text-center">Register Here</h3>
+                                        <h3 className="text-center">Update Profile</h3>
 
                                         <TextField label="Full Name" variant="filled" name="fullname" className={baseClasses.input} onChange={handleChange} value={values.username} />
                                         <TextField label="Email" variant="filled" name="email" className={baseClasses.input} onChange={handleChange} value={values.email} />
@@ -81,9 +81,11 @@ const Profile = props => {
 
             <Card className={clsx(baseClasses.card, customClasses.card)}>
                 <CardContent>
-                    <TextField label="Full Name" variant="filled" name="fullname" className={baseClasses.input} />
-                    <TextField label="Email" variant="filled" name="email" className={baseClasses.input} />
-                    <TextField type="password" label="Password" name="password" variant="filled" className={baseClasses.input} />
+
+                    <h3 className="text-center">Update Password</h3>
+
+                    <TextField label="Old Password" variant="filled" name="email" className={baseClasses.input} />
+                    <TextField type="password" label="New Password" name="password" variant="filled" className={baseClasses.input} />
 
                     <div className="text-center">
                         <Button className="mt-5 w-100" >Submit</Button>

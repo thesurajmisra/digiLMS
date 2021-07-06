@@ -13,7 +13,7 @@ const ManageUser = props => {
     const baseClasses = cssClasses();
 
     const fetchUsers = () => {
-        userService.getAll()
+        userService.getAllUsers()
             .then(data => {
                 console.log(data);
                 setUserList(data);
@@ -43,47 +43,57 @@ const ManageUser = props => {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <Typography>{user.name}</Typography>
+                            <p><b>{user.fullname}</b></p>
                         </AccordionSummary>
                         <AccordionDetails>
+                            <div style={{ display: 'block' }}>
+                                <div className="row mt-4">
+                                    <div className="col-4">
+                                        <p>Fullname</p>
+                                    </div>
+                                    <div className="col-8">
 
-                            <div className="row">
-                                <div className="col-4">
-                                    <p>Description</p>
+                                    </div>
                                 </div>
-                                <div className="col-8">
-                                    <p>{user.description}</p>
+                                <br />
+
+                                <div className="row mt-4">
+                                    <div className="col-4">
+                                        <p>Email : </p>
+                                    </div>
+                                    <div className="col-8">
+                                        <p><b>{user.email}</b></p>
+                                    </div>
                                 </div>
+                                <br />
+
+                                <div className="row mt-4">
+                                    <div className="col-4">
+                                        <p>Age : </p>
+                                    </div>
+                                    <div className="col-8">
+                                        <p><b>{user.age}</b></p>
+                                    </div>
+                                </div>
+
+                                <div className="row mt-4">
+                                    <div className="col-4">
+                                        <p>Scope : </p>
+                                    </div>
+                                    <div className="col-8">
+                                        <p><b>{user.isadmin ? 'Admin' : 'User'}</b></p>
+                                    </div>
+                                </div>
+
+                                <Button type="submit" className="mt-5 w-50" variant="contained" color="secondary">Update</Button>
+                                <Button type="submit" className="mt-5 w-50 bg-danger color-white" variant="contained"
+                                    onClick={(e) => deleteUser(user._id)}
+                                >
+                                    Delete
+                                </Button>
                             </div>
-                            <br />
 
-                            <div className="row">
-                                <div className="col-4">
-                                    <p>Features</p>
-                                </div>
-                                <div className="col-8">
-                                    <p>{user.features}</p>
-                                </div>
-                            </div>
-                            <br />
 
-                            <div className="row">
-                                <div className="col-4">
-                                    <p>Price</p>
-                                </div>
-                                <div className="col-8">
-                                    <p>{user.price}</p>
-                                </div>
-                            </div>
-
-                            <Button varaint="outline">Update</Button>
-                            <Button
-                                varaint="outline"
-                                color="secondary"
-                                onClick={(e) => deleteUser(user._id)}
-                            >
-                                Delete
-                            </Button>
                         </AccordionDetails>
                     </Accordion>
                 );

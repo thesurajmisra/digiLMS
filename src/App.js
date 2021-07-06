@@ -24,7 +24,7 @@ function App() {
         main: blue[500],
       },
       secondary: {
-        main: green[500],
+        main: '#f5bc00',
       },
       // type: 'dark'
     },
@@ -46,7 +46,7 @@ function App() {
 
           <CourseProvider>
             <Route exact path="/">
-              <Redirect to="/main/login" />
+              <Redirect to="/home" />
             </Route>
 
             <Elements stripe={stripe}>

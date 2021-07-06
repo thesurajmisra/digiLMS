@@ -11,8 +11,8 @@ const Main = props => {
     let { path, url } = useRouteMatch();
 
     return (
-        <div>
-            <Header open={false} drawerWidth={0} handleDrawerOpen={() => { }} drawer={true} />
+        <div className="auth-back">
+            <Header open={false} drawerWidth={0} handleDrawerOpen={() => { }} drawer={false} />
 
             <div>
                 <Switch>

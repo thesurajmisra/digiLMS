@@ -72,7 +72,7 @@ const Header = props => {
     }
 
     const AuthOptions = () => {
-        if (!userService.loggedin) {
+        if (!currentUser) {
 
             return (
                 <div>
@@ -101,6 +101,7 @@ const Header = props => {
 
     return (
         <AppBar
+            color="secondary"
             position="sticky"
             className={clsx(classes.appBar, {
                 [classes.appBarShift]: open,

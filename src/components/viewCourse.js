@@ -78,8 +78,6 @@ const ViewCourse = () => {
                                         <p>{courseDetail.description}</p>
                                     </div>
                                 </div>
-                                <p>Course Name :</p>
-                                <p>Course Description :</p>
 
                             </CardContent>
                         </Card>
@@ -88,7 +86,7 @@ const ViewCourse = () => {
                     <div className="col-md-4">
                         <Card>
                             <CardContent>
-
+                                <h2>Rs. 4500/-</h2>
                                 <Button variant="contained" color="secondary" onClick={handlePurchase}>Purchase</Button>
 
                             </CardContent>

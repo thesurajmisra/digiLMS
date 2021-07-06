@@ -10,6 +10,7 @@ import { Ballot } from '@material-ui/icons';
 import { CourseContext } from '../../providers/courseContext';
 import { Autocomplete } from '@material-ui/lab';
 import { Formik } from 'formik';
+import Swal from 'sweetalert2';
 
 const styles = makeStyles(theme => ({
     root: {
@@ -84,6 +85,11 @@ const AddCourse = () => {
         courseService.addCourse(formdata)
             .then(res => {
                 console.log(res);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucess',
+                    text: 'Course Added Successfully'
+                })
             })
     }
 
@@ -161,11 +167,23 @@ const AddCourse = () => {
 
         const formData = new FormData()
         formData.append('file', file)
-
+        console.log(file);
         courseService.uploadFile(formData)
             .then(res => console.log(res));
 
         console.log(prop);
+
+        const sections = {}
+        const lectures = {}
+
+        lectures[lect_i] = { content: { $set: file.name } };
+        sections[sect_i] = { lectures: lectures };
+
+        const newData = update(curriculum, {
+            sections: sections
+        });
+
+        setCurriculum(newData);
 
     }
 

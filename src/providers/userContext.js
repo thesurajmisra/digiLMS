@@ -61,7 +61,7 @@ export const UserProvider = props => {
             .then(response => response.json());
     }
 
-    const getAll = () => {
+    const getAllUsers = () => {
 
         return fetch(url + '/getall')
             .then(response => response.json());
@@ -83,10 +83,10 @@ export const UserProvider = props => {
         setCurrentUser,
 
         addUser,
-        getAll,
         getUserByEmail,
         deleteUser,
         purchaseCourse,
+        getAllUsers,
         Logout
     }
 

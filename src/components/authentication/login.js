@@ -1,4 +1,4 @@
-import { Card, CardContent, makeStyles } from "@material-ui/core";
+import { Button, Card, CardContent, makeStyles } from "@material-ui/core";
 import clsx from "clsx";
 import { Formik } from "formik";
 import { useContext } from "react";
@@ -92,12 +92,14 @@ const Login = () => {
                                 <input type="text" className="form-control" id="email" onChange={handleChange} value={values.email} />
 
                                 <label className="mt-4">Password</label>
-                                <input type="text" className="form-control" id="password" onChange={handleChange} value={values.password} />
+                                <input type="password" className="form-control" id="password" onChange={handleChange} value={values.password} />
 
 
 
                                 <div className="text-center">
-                                    <button className="btn btn-warning mt-5 w-100" >Submit</button>
+                                    <Button type="submit" className="mt-5 w-100" variant="contained" color="secondary" >
+                                        Submit
+                                    </Button>
                                 </div>
 
                                 <p className="mt-3 text-center">Register Instead? <Link to="/main/register">Register Here</Link></p>

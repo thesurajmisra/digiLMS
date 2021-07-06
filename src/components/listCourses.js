@@ -15,7 +15,6 @@ import { useHistory } from 'react-router';
 
 const useStyles = makeStyles(() => ({
     root: {
-        maxWidth: "90%",
         margin: 'auto',
     },
     content: {
@@ -62,14 +61,22 @@ const ListCourses = props => {
         <div className="col-md-10 mx-auto">
 
             <Card className="hero">
-                <h1>Explore Courses</h1>
+                <CardContent className="card-body" style={{ padding: '5rem 5rem' }}>
+                    <h1 className="text-center">Explore Courses</h1>
+
+                    <div className="input-group mt-5">
+                        <input className="form-control" />
+                        <button className="btn btn-primary">Search</button>
+                    </div>
+
+                </CardContent>
             </Card>
 
             <div className="row mt-5">
                 {
                     courseList.map(course => {
                         return (
-                            <div className="col-md-3 mt-5" key={course._id}>
+                            <div className="col-md-4 mt-5" key={course._id}>
                                 <Card className={cx(cardStyles.root, fadeShadowStyles.root)}>
                                     <CardMedia
                                         classes={wideCardMediaStyles}
